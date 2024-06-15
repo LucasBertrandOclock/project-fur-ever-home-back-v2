@@ -1,0 +1,9 @@
+import "dotenv/config";
+
+const createToken = (data) => {
+  return jwt.sign(data, process.env.SECRET_KEY, {
+    expiresIn: "1h",
+  });
+};
+
+export default createToken;
