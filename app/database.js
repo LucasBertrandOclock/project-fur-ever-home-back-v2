@@ -18,7 +18,7 @@ try {
   await sequelize.authenticate();
   console.log("Connection has been established successfully.");
 } catch (error) {
-  errorHandler._500(error, req, res);
+  errorHandler._500();
 }
 
 export default sequelize;
