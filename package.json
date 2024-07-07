@@ -10,11 +10,14 @@
     "db:create": "node app/migrations/create-tables.js",
     "db:seed": "node app/migrations/seed-tables.js",
     "db:reset": "pnpm db:create && pnpm db:seed",
-    "build":"npm run db:create && npm run db:seed"
+    "build": "npm run db:create && npm run db:seed"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "dependencies": {
     "@joi/date": "^2.1.1",
     "bcrypt": "^5.1.1",

@@ -7,11 +7,13 @@ import errorHandler from "./middlewares/errorHandler.middleware.js";
 const database = process.env.DATABASE_URL;
 
 export const sequelize = new Sequelize(database, {
-  dialectModule: pg,
-  define: {
-    timestamps: false,
+  dialect: "postgres",
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
   },
-  logging: false,
 });
 
 try {
