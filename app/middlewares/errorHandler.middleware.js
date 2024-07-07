@@ -27,7 +27,7 @@ const errorHandler = {
     });
   },
 
-  _500: (error, req, res) => {
+  _500: (error, res) => {
     console.trace(error);
     res.status(500).json({
       type: "Internal Server Error",
