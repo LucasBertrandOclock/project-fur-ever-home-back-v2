@@ -21,6 +21,10 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.json({ hello: "Welcome to the FurEverHomeAPI" });
+});
+
 // CORS:
 app.use(
   cors({
