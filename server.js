@@ -41,7 +41,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const port = process.env.SERVER_PORT || 9000;
+const port = process.env.PORT || 9000;
 
 httpServer.listen(port, () => {
   console.log(`🚀 Server listening at http://localhost:${port}`);
