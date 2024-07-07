@@ -1,14 +1,10 @@
 import "dotenv/config";
 import pg from "pg";
-
-import errorHandler from "./middlewares/errorHandler.middleware";
-
 import { Sequelize } from "sequelize";
 
-const database = process.env.PG_URL;
+import errorHandler from "./middlewares/errorHandler.middleware.js";
 
-console.log(database);
-console.log(typeof database);
+const database = process.env.DATABASE_URL;
 
 export const sequelize = new Sequelize(database, {
   dialectModule: pg,

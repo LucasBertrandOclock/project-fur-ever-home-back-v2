@@ -1,29 +1,32 @@
 import { User } from "../models/user.model.js";
+import { createToken } from "../utils/token.util.js";
 import userSchemas from "../validators/user.schemas.js";
 import validate from "../validators/validator.js";
 
 const userController = {
-  getAll: async (req, res) => {
+  getAllUsers: async (req, res) => {
     const userList = await User.findAll();
     res.json(userList);
   },
 
   getById: async (req, res) => {
-    const userId = req.body.userId;
+    const userId = req.userId;
+    console.log("getById userId :", userId);
 
     if (!userId) {
       return res.status(404).json({ error: "Id inconnu" });
     }
 
-    if (userId !== req.session.userId) {
-    }
-
     const user = await User.findByPk(userId);
+    console.log("getById user :", user);
 
     if (!user) {
       return res.status(404).json({ error: "Utilisateur inconnu" });
     }
-    res.json(user);
+
+    const userTokenJWT = createToken({...user.dataValues});
+
+    res.json(userTokenJWT);
   },
 
   update: async (req, res) => {

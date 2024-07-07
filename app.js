@@ -1,13 +1,12 @@
 import "dotenv/config";
 import express from "express";
-import session from "express-session";
 import cors from "cors";
 import { rateLimit } from "express-rate-limit";
 
-import { router as apiRouter } from "./app/routers/index.js";
+import { router as apiRouter } from "./app/routers/router.js";
 import { bodySanitizer } from "./app/middlewares/bodySanitizer.middleware.js";
 
-const version = process.env.API_VERSION || 9000;
+const version = process.env.API_VERSION;
 
 const app = express();
 
@@ -37,15 +36,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Body Sanitizer:
 app.use(bodySanitizer);
-
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 },
-  })
-);
 
 app.use(`/api/v${version}`, apiRouter);
 

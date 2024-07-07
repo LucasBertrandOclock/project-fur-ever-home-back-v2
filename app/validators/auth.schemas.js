@@ -11,11 +11,23 @@ const authSchemas = {
         minDomainSegments: 2,
         tlds: { allow: ["com", "net", "fr"] },
       })
-      .required()
-      .message("Le format de l'email est incorrect"),
+      .messages({
+        "string.email": "Email must be a valid email",
+        "string.empty": "Email cannot be empty",
+        "any.required": "Email is required",
+      })
+      .required(),
     lastname: Joi.string().min(1).max(30).required(),
     firstname: Joi.string().min(1).max(30).required(),
-    birthdate: Joi.date().utc().format(["DD-MM-YYYY"]).required(),
+    birthdate: Joi.date()
+      .utc()
+      .format(["DD-MM-YYYY"])
+      .messages({
+        "string.email": "Email must be a valid email",
+        "string.empty": "Email cannot be empty",
+        "any.required": "Email is required",
+      })
+      .required(),
     password: Joi.string()
       .min(8)
       .pattern(
@@ -23,11 +35,13 @@ const authSchemas = {
           "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd][A-Za-zd@$!%*?&]{8,}$"
         )
       )
-      .required()
-      .message(
-        "Le message doit contenir au moins 8 charactère dont 1 majuscule, 1 minuscule et 1 chiffre"
-      ),
-    confirmPassword: Joi.ref(password).required(),
+      .messages({
+        "string.email": "Email must be a valid email",
+        "string.empty": "Email cannot be empty",
+        "any.required": "Email is required",
+      })
+      .required(),
+    confirmPassword: Joi.ref("password"),
     arrival_date: Joi.date().utc().format(["DD-MM-YYYY HH:mm"]),
     leaving_date: Joi.date().utc().format(["DD-MM-YYYY HH:mm"]),
     role: Joi.string().min(5).max(8).required(),
@@ -39,8 +53,12 @@ const authSchemas = {
         minDomainSegments: 2,
         tlds: { allow: ["com", "net", "fr"] },
       })
-      .required()
-      .message("Le format de l'email est incorrect"),
+      .messages({
+        "string.email": "Email must be a valid email",
+        "string.empty": "Email cannot be empty",
+        "any.required": "Email is required",
+      })
+      .required(),
     password: Joi.string()
       .min(8)
       .pattern(
@@ -48,8 +66,12 @@ const authSchemas = {
           "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd][A-Za-zd@$!%*?&]{8,}$"
         )
       )
-      .required()
-      .message("Le mot de passe envoyer ne respecte pas le format attendu"),
+      .messages({
+        "string.email": "Email must be a valid email",
+        "string.empty": "Email cannot be empty",
+        "any.required": "Email is required",
+      })
+      .required(),
   },
 };
 

@@ -1,5 +1,7 @@
+import errorHandler from "./errorHandler.middleware.js";
+
 function isLoggedIn(req, res, next) {
-  if (req.session && req.session.userRole) {
+  if (req.userId && req.userRole) {
     next();
   } else {
     res.status(401).json({ message: "Vous devez vous connecter" });
@@ -7,21 +9,18 @@ function isLoggedIn(req, res, next) {
 }
 
 function isEmployee(req, res, next) {
-  if (
-    req.session &&
-    (req.session.userRole === "Employé" || req.session.userRole === "Admin")
-  ) {
+  if (req.userId && (req.userRole === "Employé" || req.userRole === "Admin")) {
     next();
   } else {
-    res.status(401).json({ message: "Vous devez être employé pour acceder à cette fontion"});
+    errorHandler._404();
   }
 }
 
 function isAdmin(req, res, next) {
-  if (req.session && req.session.userRole === "Admin") {
+  if (req.userId && req.userRole === "Admin") {
     next();
   } else {
-    res.status(401).json({ message: "Vous devez être admin pour acceder à cette fontion" });
+    errorHandler._404();
   }
 }
 

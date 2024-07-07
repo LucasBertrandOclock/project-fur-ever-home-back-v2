@@ -2,7 +2,7 @@ import "dotenv/config";
 import { Server as WebsocketServer } from "socket.io";
 import { createServer } from "node:http";
 
-import { app } from "./app.js";
+import app from "./app.js";
 
 const httpServer = createServer(app);
 const io = new WebsocketServer(httpServer);

@@ -1,7 +1,7 @@
 import { Animal } from "../models/animal.model.js";
 
 const animalController = {
-  getAll: async (req, res) => {
+  getAllAnimals: async (req, res) => {
     const animalList = await Animal.findAll();
     res.json(animalList);
   },
